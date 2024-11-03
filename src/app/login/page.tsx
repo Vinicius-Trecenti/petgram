@@ -7,7 +7,9 @@ export default function Login() {
         <div className="flex flex-col min-h-screen justify-center">
 
             <div className="flex flex-col flex-grow justify-center gap-4 p-8">
-                <div className="p-8">
+                <div className="flex flex-col items-center p-8 gap-4">
+                    <img src="dog.svg" alt="" className="w-20 h-20"/>
+
                     <Logo />
                 </div>
 
@@ -27,7 +29,7 @@ export default function Login() {
             <div className="w-full mb-4">
                 <hr className="w-full border-1 mt-8"/>
                     <p className=" text-sm text-gray-500 text-center mt-4">Não tem uma conta?
-                        <a href="" className="text-md text-sky-400 font-bold ml-1">
+                        <a href="/register" className="text-md text-sky-400 font-bold ml-1">
                             Sing up
                         </a>
                     </p>

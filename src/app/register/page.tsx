@@ -46,7 +46,7 @@ export default function Register() {
             <div className="w-full mb-4">
                 <hr className="w-full border-1 mt-8"/>
                     <p className=" text-sm text-gray-500 text-center mt-4">Have an account?
-                        <a href="" className="text-md text-sky-400 font-bold ml-1">
+                        <a href="/login" className="text-md text-sky-400 font-bold ml-1">
                             Log In
                         </a>
                     </p>

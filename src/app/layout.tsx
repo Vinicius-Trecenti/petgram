@@ -20,8 +20,11 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "PETGRAM",
+  title: "PetGram",
   description: "Petgram - The pet social network a project from the IFSP - Caraguatatuba.",
+  icons: {
+    icon: "/dog.svg",
+  },
 };
 
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
