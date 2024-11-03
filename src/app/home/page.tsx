@@ -1,6 +1,8 @@
 import Carrossel from "@/components/Carrossel";
 import Header from "@/components/Header";
 import NavbarMobile from "@/components/NavbarMobile";
+import PostComponent from "@/components/PostComponent";
+import StoryIcon from "@/components/StoryIcon";
 
 export default function Home() {
     return (
@@ -11,8 +13,8 @@ export default function Home() {
                 <Carrossel />
             </div>
 
-            <div className="flex flex-col flex-grow justify-center gap-4 p-8">
-                conteudo
+            <div className="flex flex-col flex-grow justify-center">
+                <PostComponent />
             </div>
 
             <div className="w-full mb-4">
