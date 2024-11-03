@@ -4,7 +4,7 @@ import { FaRegCommentDots } from "react-icons/fa";
 
 export default function Header() {
     return (
-        <div className="border border-solid border-gray-300">
+        <div className="border border-solid border-gray-300 bg-white">
             <div className="flex justify-between p-4">
                 <Logo />
 

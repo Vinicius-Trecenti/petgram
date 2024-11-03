@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 export default function NavbarMobile() {
     return (
-        <div className="flex justify-between p-2 border-t border-gray-300 border-solid">
+        <div className="flex justify-between p-4 border-t border-gray-300 border-solid bg-white">
 
             <div className="mt-2">
                 <Link href="/home">

@@ -3,16 +3,24 @@ import { FaRegComment } from "react-icons/fa";
 import { LuSend } from "react-icons/lu";
 import { FaRegBookmark } from "react-icons/fa6";
 
-export default function PostComponent() {
+interface PostComponentProps {
+    profile_picture: string;
+    username: string;
+    post_url: string;
+    description: string;
+    likes: number;
+}
+
+export default function PostComponent({ profile_picture, username, post_url, description, likes }: PostComponentProps) {
     return (
         <div>
             <div className="flex items-center gap-2 ml-2 mt-2">
-                <img src="https://random.dog/aa4277d4-ffdc-45f5-b87e-2b28b7f23f2e.jpg" alt="" className="w-12 h-12 rounded-full"/>
+                <img src={profile_picture} alt="" className="w-12 h-12 rounded-full"/>
 
-                <p className="font-bold">Bolt Super Cão</p>
+                <p className="font-bold">{username}</p>
             </div>
 
-            <img src="https://random.dog/aa4277d4-ffdc-45f5-b87e-2b28b7f23f2e.jpg" alt="" className="mt-2"/>
+            <img src={post_url} alt="" className="mt-2"/>
 
             <div className="flex justify-between p-2">
                 <div className="flex items-center gap-4">
@@ -28,12 +36,11 @@ export default function PostComponent() {
             </div>
 
             <div className="p-2">
-                <p className="font-bold">540 Likes</p>
-                <p className="mt-1 font-bold">Bolt Super Cão <span className="font-medium">Curtindo um barzinho na sexta</span></p>
-                <p className="mt-1">#MeuDonoFicouEmCasa</p>
+                <p className="font-bold">{likes} Likes</p>
+                <p className="mt-1 font-bold">{username} <span className="font-medium">{description}</span></p>
+                <p className="mt-1">#Petgram</p>
 
                 <p className="text-sm mt-2">Ver todos os 2 comentários</p>
-                {/* <p className="text-sm">Há 3 minutos</p> */}
             </div>
 
         </div>
