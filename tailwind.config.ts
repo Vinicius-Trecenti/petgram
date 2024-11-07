@@ -12,6 +12,7 @@ const config: Config = {
         'verde-custom': '#61a353',
         background: "var(--background)",
         foreground: "var(--foreground)",
+
       },
     },
   },
