@@ -32,11 +32,11 @@ export default function Register() {
                 <Input text="Password" type="password"/>
 
                 <p className="text-center font-medium mt-4">
-                    As pessoas que usam nosso serviço podem ter enviado suas informações de contato para o Instagram. <a className="text-sky-400">Saiba mais</a>
+                    As pessoas que usam nosso serviço podem ter enviado suas informações de contato para o Instagram. <a className="text-green-500">Saiba mais</a>
                 </p>
 
                 <p className="text-center font-medium mt-4">
-                Ao se cadastrar, você concorda com nossos <a href="" className="text-sky-400">Termos</a>, <a href="" className="text-sky-400">Política de Privacidade</a> e <a href="" className="text-sky-400">Política de Cookies</a>.
+                Ao se cadastrar, você concorda com nossos <a href="" className="text-green-500">Termos</a>, <a href="" className="text-green-500">Política de Privacidade</a> e <a href="" className="text-green-500">Política de Cookies</a>.
                 </p>
 
                 <Button text="Sing Up"/>
@@ -46,7 +46,7 @@ export default function Register() {
             <div className="w-full mb-4">
                 <hr className="w-full border-1 mt-8"/>
                     <p className=" text-sm text-gray-500 text-center mt-4">Have an account?
-                        <a href="/login" className="text-md text-sky-400 font-bold ml-1">
+                        <a href="/login" className="text-md text-green-500 font-bold ml-1">
                             Log In
                         </a>
                     </p>

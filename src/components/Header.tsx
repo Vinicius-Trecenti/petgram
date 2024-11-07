@@ -1,16 +1,14 @@
 import Logo from "./Logo";
-import { IoCameraOutline } from "react-icons/io5";
-import { FaRegCommentDots } from "react-icons/fa";
+import { IoPaw } from "react-icons/io5";
 
 export default function Header() {
     return (
-        <div className="border border-solid border-gray-300 bg-white">
+        <div className="bg-verde-custom">
             <div className="flex justify-between p-4">
                 <Logo />
 
                 <div className="flex gap-4">
-                    <IoCameraOutline className="w-8 h-8" />
-                    <FaRegCommentDots className="w-8 h-8" />
+                    <IoPaw className="text-white w-8 h-8" />
                 </div>
             </div>
         </div>

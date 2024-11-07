@@ -11,7 +11,7 @@ export default function StoryIcon({ url }: StoryIconProps) {
                 </div>
             </div>
 
-            <p className="text-center">user</p>
+            <p className="text-center">Pets</p>
         </div>
     );
 }

@@ -13,10 +13,10 @@ export default function Login() {
                     <Logo />
                 </div>
 
-                <Input text="Phone number, email or username" type="email"/>
+                <Input text="Email or username" type="email"/>
                 <Input text="Password" type="password"/>
 
-                <a href="" className="text-md text-sky-400 font-bold text-end">Esqueceu a senha?</a>
+                <a href="" className="text-md text-green-500 font-bold text-end">Esqueceu a senha?</a>
 
                 <Button text="Log In"/>
 
@@ -29,7 +29,7 @@ export default function Login() {
             <div className="w-full mb-4">
                 <hr className="w-full border-1 mt-8"/>
                     <p className=" text-sm text-gray-500 text-center mt-4">Não tem uma conta?
-                        <a href="/register" className="text-md text-sky-400 font-bold ml-1">
+                        <a href="/register" className="text-md text-green-500 font-bold ml-1">
                             Sing up
                         </a>
                     </p>

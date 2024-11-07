@@ -1,35 +1,27 @@
 import { GiDogHouse } from "react-icons/gi";
-import { IoSearch } from "react-icons/io5";
-import { CgAddR } from "react-icons/cg";
-import { MdSlowMotionVideo } from "react-icons/md";
 import { FaRegCircleUser } from "react-icons/fa6";
+import { MdOutlineCamera } from "react-icons/md";
 import Link from 'next/link'
 
 export default function NavbarMobile() {
     return (
-        <div className="flex justify-between p-4 border-t border-gray-300 border-solid bg-white">
+        <div className="flex justify-between p-4 border-t bg-verde-custom text-white">
 
             <div className="mt-2">
                 <Link href="/home">
-                    <GiDogHouse className="w-8 h-8"/>
+                    <GiDogHouse className="w-10 h-10"/>
                 </Link>
             </div>
 
             <div className="mt-2">
-                <IoSearch  className="w-8 h-8"/>
-            </div>
-
-            <div className="mt-2">
-                <CgAddR  className="w-8 h-8"/>
-            </div>
-
-            <div className="mt-2">
-                <MdSlowMotionVideo  className="w-8 h-8"/>
+                <Link href="/">
+                    <MdOutlineCamera className="w-12 h-12"/>
+                </Link>
             </div>
 
             <div className="mt-2">
                 <Link href="/profile">
-                    <FaRegCircleUser  className="w-8 h-8"/>
+                    <FaRegCircleUser  className="w-10 h-10"/>
                 </Link>
             </div>
 

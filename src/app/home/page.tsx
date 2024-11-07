@@ -2,16 +2,15 @@ import Carrossel from "@/components/Carrossel";
 import Header from "@/components/Header";
 import NavbarMobile from "@/components/NavbarMobile";
 import PostComponent from "@/components/PostComponent";
-import StoryIcon from "@/components/StoryIcon";
 
 export default function Home() {
     return (
-        <div className="flex flex-col min-h-screen justify-center pt-16 pb-16">
+        <div className="flex flex-col min-h-screen justify-center pt-20 pb-24">
             <div className="fixed top-0 w-full z-10">
                 <Header />
             </div>
 
-            <Carrossel />
+            {/* <Carrossel /> */}
 
             <div className="flex flex-col flex-grow justify-center">
                 <PostComponent
