@@ -14,7 +14,7 @@ export default function NavbarMobile() {
             </div>
 
             <div className="mt-2">
-                <Link href="/">
+                <Link href="/newPost">
                     <MdOutlineCamera className="w-12 h-12"/>
                 </Link>
             </div>
