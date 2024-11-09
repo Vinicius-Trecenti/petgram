@@ -26,12 +26,17 @@ export default function page() {
     return (
         <div className="flex flex-col min-h-screen justify-center pt-2 pb-16 bg-branco-custom">
 
-            <HeaderComponent text="Nova Publicação " />
+            <HeaderComponent text="Editar Perfil" />
 
             <div className="grid justify-center items-center gap-4 p-8">
 
-                <div className="text-black flex justify-center capitalize">
-                    Selecione uma imagem
+                <div className="bg-white w-30 h-39 flex justify-center items-center relative filter drop-shadow-md">
+                    {selectedImage ? (
+                        <img src={selectedImage} alt="Selected" className="w-full h-full object-cover rounded" />
+                    ) : (
+                        <img src="addImageIcon.svg" alt="" className="w-20 h-20" />
+                    )}
+
                 </div>
 
                 <div className="bg-white w-80 h-80 flex justify-center items-center relative filter drop-shadow-md">
@@ -60,7 +65,7 @@ export default function page() {
                     value={text}
                     onChange={handleChange}
                 ></textarea>
-                
+
                 <div className="flex justify-center">
                     <button className="bg-green-700 hover:bg-verde-custom text-white font-bold p-2 rounded-full py-3 px-6 w-60 filter drop-shadow-md">
                         Publicar

@@ -1,13 +1,14 @@
-import Header from "@/components/Header"
+import Header from "@/components/HeaderProfile"
 import NavbarMobile from "@/components/NavbarMobile"
 import Carrossel from "@/components/Carrossel"
 import NavbarProfile from "@/components/NavbarProfile"
+import HeaderProfile from "@/components/HeaderProfile"
 
 export default function Profile() {
     return (
         <div className="flex flex-col min-h-screen pt-16 pb-16">
             <div className="fixed top-0 w-full z-10">
-                <Header />
+                <HeaderProfile/>
             </div>
 
             <div className="flex flex-col mt-5">

@@ -1,5 +1,5 @@
 import Carrossel from "@/components/Carrossel";
-import Header from "@/components/Header";
+import HeaderHome from "@/components/HeaderHome";
 import NavbarMobile from "@/components/NavbarMobile";
 import PostComponent from "@/components/PostComponent";
 
@@ -7,7 +7,7 @@ export default function Home() {
     return (
         <div className="flex flex-col min-h-screen justify-center pt-20 pb-24">
             <div className="fixed top-0 w-full z-10">
-                <Header />
+                <HeaderHome />
             </div>
 
             {/* <Carrossel /> */}
