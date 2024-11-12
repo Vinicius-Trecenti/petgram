@@ -28,13 +28,14 @@ const Modal: React.ComponentType<ModalProps> = ({ isOpen, onClose, children }) =
           z-index: 1000;
         }
         .modal-content {
-          background: white;
+          background: #ffffff;
           padding: 20px;
           border-radius: 8px;
           position: relative;
           width: 40%;
           max-width: 500px;
-        }
+          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
         .close-button {
           position: absolute;
           top: 10px;

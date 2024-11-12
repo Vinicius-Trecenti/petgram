@@ -42,11 +42,11 @@ export default function Profile() {
             </div>
 
             <div className="flex justify-center gap-4 mt-4 border-b border-gray-300 pb-4">
-                <button className="bg-gray-500 p-1 px-4 text-white rounded-md">
+                <button className="bg-gray-500 p-1 px-4 text-white rounded-lg">
                     Editar perfil
                 </button>
 
-                <button className="bg-gray-500 p-1 px-4 text-white rounded-md">
+                <button className="bg-gray-500 p-1 px-4 text-white rounded-lg">
                     Compartilhar perfil
                 </button>
             </div>

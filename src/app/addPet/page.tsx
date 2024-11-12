@@ -31,7 +31,7 @@ export default function page() {
     return (
         <div className="flex flex-col justify-center items-center pt-14 pb-16 bg-branco-custom" style={{ minHeight: '80vh' }}>
 
-            <HeaderComponent text="Editar Perfil" />
+            <HeaderComponent text="Cadastrar Pet" />
 
             <div className="grid justify-center items-center gap-8 p-8">
 
@@ -76,7 +76,7 @@ export default function page() {
 
                 <div className="relative w-full">
                     <label className="absolute top-0 left-3 text-gray-600 text-sm">
-                        Nome de Usuario
+                        Raça
                     </label>
                     <input
                         type="text"

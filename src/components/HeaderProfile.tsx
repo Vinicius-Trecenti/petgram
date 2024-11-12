@@ -27,13 +27,18 @@ export default function HeaderWithModal() {
                     <button onClick={closeModal} className="flex justify-end ">
                         <SlMenu className="text-verde-custom w-8 h-8" />
                     </button>
-                    
-                    <Link href="/editProfile">
-                        <p className=" text-black text-center capitalize">Editar perfil</p>
-                    </Link>
-                    <Link href="/newPost">
-                        <p className="text-black text-center capitalize">Cadastrar Pet</p>
-                    </Link>
+
+                    <div className="bg-branco-custom relative filter drop-shadow-lg rounded-md">
+                        <Link href="/editProfile">
+                            <p className=" text-black text-center capitalize">Editar perfil</p>
+                        </Link>
+                    </div>
+                    <div className="bg-branco-custom relative filter drop-shadow-lg rounded-md">
+                        <Link href="/addPet">
+                            <p className="text-black text-center capitalize">Cadastrar Pet</p>
+                        </Link>
+                    </div>
+
                 </div>
             </Modal>
         </div>
