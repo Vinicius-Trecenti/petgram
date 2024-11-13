@@ -1,4 +1,4 @@
-import Logo from "@/components/Logo";
+import Logo from "@/components/LogoBlack";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 
