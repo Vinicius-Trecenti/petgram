@@ -49,6 +49,10 @@ export default function Profile() {
                 <button className="bg-gray-500 p-1 px-4 text-white rounded-lg">
                     Compartilhar perfil
                 </button>
+
+                <button className="bg-gray-500 p-1 px-4 text-white rounded-lg">
+                    Compartilhar perfil
+                </button>
             </div>
 
             <Carrossel />
