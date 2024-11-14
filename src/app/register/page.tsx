@@ -1,8 +1,23 @@
+'use client';
+
 import Logo from "@/components/LogoBlack";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 
+import { useState } from "react";
+import register from "@/api/auth/register";
+
 export default function Register() {
+
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleRegister = () => {
+        register(email, name, username, password);
+    }
+
     return (
         <div className="flex flex-col min-h-screen justify-center">
 
@@ -26,10 +41,10 @@ export default function Register() {
                     <hr className="w-full border-1"/>
                 </div>
 
-                <Input text="Phone number or email" type="email"/>
-                <Input text="Full name" type="name"/>
-                <Input text="Username" type="username"/>
-                <Input text="Password" type="password"/>
+                <Input text="Phone number or email" type="email" onChange={(e) => setEmail(e.target.value)}/>
+                <Input text="Full name" type="name"              onChange={(e) => setName(e.target.value)}/>
+                <Input text="Username" type="username"           onChange={(e) => setUsername(e.target.value)}/>
+                <Input text="Password" type="password"           onChange={(e) => setPassword(e.target.value)}/>
 
                 <p className="text-center font-medium mt-4">
                     As pessoas que usam nosso serviço podem ter enviado suas informações de contato para o Instagram. <a className="text-green-500">Saiba mais</a>
@@ -39,7 +54,7 @@ export default function Register() {
                 Ao se cadastrar, você concorda com nossos <a href="" className="text-green-500">Termos</a>, <a href="" className="text-green-500">Política de Privacidade</a> e <a href="" className="text-green-500">Política de Cookies</a>.
                 </p>
 
-                <Button text="Sing Up"/>
+                <Button text="Sing Up" onClick={handleRegister}/>
 
             </div>
 
