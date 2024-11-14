@@ -39,8 +39,13 @@ export default function HeaderWithModal() {
                         </Link>
                     </div>
 
+                    {/* Mudar o onclick do botão para deslogar o usuário /> */}
+                    <button onClick={closeModal} className="bg-branco-custom relative filter drop-shadow-lg rounded-md">
+                        <p className="text-black text-center capitalize">Sair</p>
+                    </button>
                 </div>
             </Modal>
+            
         </div>
     );
 }
