@@ -1,8 +1,37 @@
+'use client';
+
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Logo from "@/components/LogoBlack";
 
+import { useState } from "react";
+import login from "@/api/auth/login";
+
 export default function Login() {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const [errors, setErrors] = useState<any[]>([]);
+
+    const handleLogin = () => {
+        const errors = login(email, password);
+
+        if (errors) {
+            setErrors(errors);
+        }
+        else{
+            setErrors([]);
+        }
+
+        console.log(email, password);
+    }
+
+    const getErrorMessage = (field: string) => {
+        const error = errors.find((err) => err.path.includes(field));
+        return error ? error.message : ''
+    }
+
     return (
         <div className="flex flex-col min-h-screen justify-center">
 
@@ -13,12 +42,19 @@ export default function Login() {
                     <Logo />
                 </div>
 
-                <Input text="Email or username" type="email"/>
-                <Input text="Password" type="password"/>
+                <div className="">
+                    <Input text="Email or username" type="email" onChange={(e) => setEmail(e.target.value)}/>
+                    {getErrorMessage('email') && <p className="text-red-500 text-sm mt-1">{getErrorMessage('email')}</p>}
+                </div>
+
+                <div className="">
+                    <Input text="Password" type="password" onChange={(e) => setPassword(e.target.value)}/>
+                    {getErrorMessage('password') && <p className="text-red-500 text-sm mt-1">{getErrorMessage('password')}</p>}
+                </div>
 
                 <a href="" className="text-md text-green-500 font-bold text-end">Esqueceu a senha?</a>
 
-                <Button text="Log In"/>
+                <Button text="Log In" onClick={handleLogin}/>
 
                 <button type="button" className="flex justify-center gap-2 text-center border border-gray-300 rounded p-2">
                     <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="" className="w-5 h-5"/>

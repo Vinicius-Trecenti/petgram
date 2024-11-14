@@ -14,8 +14,22 @@ export default function Register() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const [errors, setErrors] = useState<any[]>([]);
+
     const handleRegister = () => {
-        register(email, name, username, password);
+        const errors = register(email, name, username, password);
+
+        if (errors) {
+            setErrors(errors);
+        }
+        else{
+            setErrors([]);
+        }
+    }
+
+    const getErrorMessage = (field: string) => {
+        const error = errors.find((err) => err.path.includes(field));
+        return error ? error.message : '';
     }
 
     return (
@@ -41,10 +55,34 @@ export default function Register() {
                     <hr className="w-full border-1"/>
                 </div>
 
-                <Input text="Phone number or email" type="email" onChange={(e) => setEmail(e.target.value)}/>
-                <Input text="Full name" type="name"              onChange={(e) => setName(e.target.value)}/>
-                <Input text="Username" type="username"           onChange={(e) => setUsername(e.target.value)}/>
-                <Input text="Password" type="password"           onChange={(e) => setPassword(e.target.value)}/>
+                <div className="">
+                    <Input text="Email" type="email" onChange={(e) => setEmail(e.target.value)}/>
+                    {getErrorMessage("email") && (
+                        <p className="text-red-500 text-sm mt-1">{getErrorMessage("email")}</p>
+                    )}
+                </div>
+
+                <div className="">
+                    <Input text="Full name" type="name" onChange={(e) => setName(e.target.value)}/>
+                    {getErrorMessage("name") && (
+                        <p className="text-red-500 text-sm mt-1">{getErrorMessage("name")}</p>
+                    )}
+                </div>
+
+                <div className="">
+                    <Input text="Username" type="username" onChange={(e) => setUsername(e.target.value)}/>
+                    {getErrorMessage("username") && (
+                        <p className="text-red-500 text-sm mt-1">{getErrorMessage("username")}</p>
+                    )}
+                </div>
+
+                <div className="">
+                    <Input text="Password" type="password" onChange={(e) => setPassword(e.target.value)}/>
+                    {getErrorMessage("password") && (
+                        <p className="text-red-500 text-sm mt-1">{getErrorMessage("password")}</p>
+                    )}
+                </div>
+
 
                 <p className="text-center font-medium mt-4">
                     As pessoas que usam nosso serviço podem ter enviado suas informações de contato para o Instagram. <a className="text-green-500">Saiba mais</a>
