@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 interface userInput {
     email: string,
+    fullname: string,
     username: string,
     password: string,
     photo_user?: string,
@@ -14,6 +15,9 @@ interface userInput {
 
 export const userSchema = z.object({
     email: z.string({message: "The email must be a string."}).email(),
+    fullname: z.string({message: "The full name must be a string."})
+    .min(17, {message: "The full name must be at least 17 characters."})
+    .max(255, {message: "The full name must be a maximum of 255 characters"}),
     username: z.string()
     .min(3,{message: "The username must be at least 3 characters."}).
     max(50, {message: "Username must be a maximum of 50 characters"}),

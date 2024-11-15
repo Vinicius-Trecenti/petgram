@@ -1,5 +1,7 @@
 import { userCreate, userSchema, findEmail } from "../../models/userModel";
 import { Request, Response } from "express";
+import bcrypt from "bcrypt";
+
 
 export const createUser = async (req: Request, res: Response) => {
 
@@ -23,6 +25,10 @@ export const createUser = async (req: Request, res: Response) => {
             error: "Unable to complete registration as email is already registered ! "
         });
     }
+
+    
+    const passwordHash = await bcrypt.hash(validateUser.data.password, 10);
+    validateUser.data.password = passwordHash
     
     //criação de usuário
     const result = await userCreate(validateUser.data);
