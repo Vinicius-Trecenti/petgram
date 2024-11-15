@@ -1,5 +1,6 @@
 import express, { Request, Response} from 'express';
 import router from './routers/userRouter';
+import routerLogin from './routers/login';
 
 const app = express();
 const PORT = 3000;
@@ -9,7 +10,7 @@ app.use(express.json());
 app.get('/', (req: Request, res: Response)=> {
     res.status(200).send('Welcome to API Petgram !');
 });
-
+app.use('/login', routerLogin)
 app.use('/user', router)
 
 app.listen(PORT, ()=> {

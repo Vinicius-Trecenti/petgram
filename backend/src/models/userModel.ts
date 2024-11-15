@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 const prisma = new PrismaClient();
 
-interface userInput {
+export interface userInput {
     email: string,
     fullname: string,
     username: string,
