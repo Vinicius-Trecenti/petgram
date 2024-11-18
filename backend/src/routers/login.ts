@@ -1,10 +1,9 @@
-import express, { Request, Response } from 'express';
-import loginWithEmail from '../controllers/login';
+import { Router } from 'express';
+import { loginWithEmail } from '../controllers/login';
+import { forgot } from '../controllers/auth';
 
-const router = express.Router();
+export const authRouter = Router();
 
-router.post('/loginEmail', (req: Request, res: Response) => {
-    loginWithEmail(req, res);
-});
+    authRouter.post('/loginEmail', loginWithEmail);
+    authRouter.post('/forgot', forgot);
 
-export default router;
