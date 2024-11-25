@@ -27,10 +27,10 @@ import bcrypt from "bcrypt";
 //         });
 //     }
 
-    
+
 //     const passwordHash = await bcrypt.hash(validateUser.data.password, 10);
 //     validateUser.data.password = passwordHash
-    
+
 //     //criação de usuário
 //     const result = await userCreate(validateUser.data);
 //     return res.status(201).json({
@@ -44,11 +44,11 @@ import bcrypt from "bcrypt";
 //             error: "Internal server error. Please try again."
 //         })
 //     }
-    
+
 // }
 
 export const createUser: RequestHandler = async (req, res)=>{
-    
+
     const user = req.body;
 
     const validateUserData = userSchema.safeParse(user);

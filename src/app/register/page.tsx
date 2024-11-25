@@ -10,14 +10,14 @@ import register from "@/api/auth/register";
 export default function Register() {
 
     const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
+    const [fullname, setfullname] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const [errors, setErrors] = useState<any[]>([]);
 
     const handleRegister = () => {
-        const errors = register(email, name, username, password);
+        const errors = register(email, fullname, username, password);
 
         if (errors) {
             setErrors(errors);
@@ -28,9 +28,12 @@ export default function Register() {
     }
 
     const getErrorMessage = (field: string) => {
+        if (!Array.isArray(errors)) return ''; // Garante que `errors` é um array
+
         const error = errors.find((err) => err.path.includes(field));
         return error ? error.message : '';
-    }
+    };
+
 
     return (
         <div className="flex flex-col min-h-screen justify-center">
@@ -63,7 +66,7 @@ export default function Register() {
                 </div>
 
                 <div className="">
-                    <Input text="Full name" type="name" onChange={(e) => setName(e.target.value)}/>
+                    <Input text="Full name" type="name" onChange={(e) => setfullname(e.target.value)}/>
                     {getErrorMessage("name") && (
                         <p className="text-red-500 text-sm mt-1">{getErrorMessage("name")}</p>
                     )}
