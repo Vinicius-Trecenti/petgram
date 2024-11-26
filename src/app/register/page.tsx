@@ -13,17 +13,18 @@ export default function Register() {
     const [fullname, setfullname] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [alert, setAlert] = useState('');
 
     const [errors, setErrors] = useState<any[]>([]);
 
-    const handleRegister = () => {
-        const errors = register(email, fullname, username, password);
+    const handleRegister = async () => {
+        const response = await register(email, fullname, username, password);
 
-        if (errors) {
-            setErrors(errors);
-        }
-        else{
-            setErrors([]);
+        console.log(response[0].message);
+
+        if (response[0].message) {
+            setAlert(response[0].message);
+            console.log("Erro ao criar usuário:", response[0].message);
         }
     }
 
@@ -57,6 +58,10 @@ export default function Register() {
                     <p className="text-center font-medium">or</p>
                     <hr className="w-full border-1"/>
                 </div>
+
+                {alert && (
+                    <p className="text-red-500 text-sm text-center mt-1">{alert}</p>
+                )}
 
                 <div className="">
                     <Input text="Email" type="email" onChange={(e) => setEmail(e.target.value)}/>

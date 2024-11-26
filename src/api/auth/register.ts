@@ -21,13 +21,14 @@ export default async function register(email: string, fullname: string, username
         });
 
         if (!response.ok) {
+            console.log("Erro ao criar usuário:", response.status);
             const errorData = await response.json();
             return errorData.errors || []; // Retorna um array de erros ou vazio
         }
 
         const responseData = await response.json();
         console.log("Usuário criado com sucesso:", responseData);
-        return []; // Nenhum erro
+        return responseData;
     } catch (error) {
         console.error("Erro inesperado:", error);
 
