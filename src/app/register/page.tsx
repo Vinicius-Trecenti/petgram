@@ -18,18 +18,26 @@ export default function Register() {
     const [errors, setErrors] = useState<any[]>([]);
 
     const handleRegister = async () => {
+        setErrors([]);
+
         const response = await register(email, fullname, username, password);
 
-        console.log(response[0].message);
-
-        if (response[0].message) {
-            setAlert(response[0].message);
-            console.log("Erro ao criar usuário:", response[0].message);
+        if(!response.success) {
+            console.log(response);
+            setErrors(response.errors);
+            return;
         }
+
+        if (response.success) {
+            const successMessage = encodeURIComponent("Cadastro realizado com sucesso!");
+            window.location.href = `/login?successMessage=${successMessage}`;
+            return;
+        }
+
     }
 
     const getErrorMessage = (field: string) => {
-        if (!Array.isArray(errors)) return ''; // Garante que `errors` é um array
+        if (!Array.isArray(errors)) return '';
 
         const error = errors.find((err) => err.path.includes(field));
         return error ? error.message : '';
@@ -71,9 +79,9 @@ export default function Register() {
                 </div>
 
                 <div className="">
-                    <Input text="Full name" type="name" onChange={(e) => setfullname(e.target.value)}/>
-                    {getErrorMessage("name") && (
-                        <p className="text-red-500 text-sm mt-1">{getErrorMessage("name")}</p>
+                    <Input text="Full name" type="fullname" onChange={(e) => setfullname(e.target.value)}/>
+                    {getErrorMessage("fullname") && (
+                        <p className="text-red-500 text-sm mt-1">{getErrorMessage("fullname")}</p>
                     )}
                 </div>
 

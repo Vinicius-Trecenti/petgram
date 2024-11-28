@@ -4,7 +4,7 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Logo from "@/components/LogoBlack";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import login from "@/api/auth/login";
 
 export default function Login() {
@@ -13,6 +13,15 @@ export default function Login() {
     const [password, setPassword] = useState('');
 
     const [errors, setErrors] = useState<any[]>([]);
+    const [successMessage, setSuccessMessage] = useState("");
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const message = queryParams.get("successMessage");
+        if (message) {
+            setSuccessMessage(decodeURIComponent(message));
+        }
+    }, []);
 
     const handleLogin = () => {
         const errors = login(email, password);
@@ -41,6 +50,10 @@ export default function Login() {
 
                     <Logo />
                 </div>
+
+                {successMessage && (
+                    <p className="text-green-500 text-center mb-4">{successMessage}</p>
+                )}
 
                 <div className="">
                     <Input text="Email or username" type="email" onChange={(e) => setEmail(e.target.value)}/>
