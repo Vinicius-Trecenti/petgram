@@ -37,9 +37,12 @@ export default function Login() {
     }
 
     const getErrorMessage = (field: string) => {
+        if (!Array.isArray(errors)) return ''; // Garante que `errors` é um array
+
         const error = errors.find((err) => err.path.includes(field));
-        return error ? error.message : ''
-    }
+        return error ? error.message : '';
+    };
+
 
     return (
         <div className="flex flex-col min-h-screen justify-center">

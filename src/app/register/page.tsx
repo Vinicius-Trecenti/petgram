@@ -23,7 +23,6 @@ export default function Register() {
         const response = await register(email, fullname, username, password);
 
         if(!response.success) {
-            console.log(response);
             setErrors(response.errors);
             return;
         }
