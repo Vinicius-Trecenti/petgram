@@ -1,37 +1,18 @@
 import { findEmail } from "../models/userModel";
 import bcrypt from "bcrypt";
 import { RequestHandler } from "express";
+import { sessionCreate } from "../models/sessionModel";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
-// export const loginWithEmail = async (req: Request, res: Response) => {
-    
-//     try {
-//         const { email, password } = req.body;
+dotenv.config();
 
-//         //validar se email existe no banco
-//         const emailExists = await findEmail(email);
-//         if (!emailExists) {
-//             return res.status(404).json({ message: "Email not found" });
-//         }
+const SECRET_KEY = process.env.SECRET_KEY;
+if (!SECRET_KEY) {
+    throw new Error("SECRET_KEY is not defined in the environment variables");
+}
 
-//         //validar senha
-//         const checkPassword = await bcrypt.compare(password, emailExists.password);
-//         if (!checkPassword) {
-//             return res.status(401).json({ message: "Invalid password" });
-//         }
-
-//         res.status(200).json({ message: "Login successful" });
-
-//     } catch (error) {
-//         console.log("Error creating user", error),
-//         res.status(500).json({
-//             error: "Internal server error. Please try again."
-//         })
-//     }
-    
-
-// }
-
-export const loginWithEmail: RequestHandler = async (req, res) => {
+export const loginWithEmail: RequestHandler = async (req, res, next) => {
     
     try {
     
@@ -50,11 +31,24 @@ export const loginWithEmail: RequestHandler = async (req, res) => {
 
         const checkPassword = await bcrypt.compare(password, checkEmail.password);
             if(!checkPassword){
-                res.status(401).json({ message: "Inavlid Password"});
+                res.status(401).json({ message: "Invalid Password"});
             return; 
         }
 
-        res.status(201).json({ message: "Login successfully"});
+        const token = jwt.sign(
+            { email: checkEmail.email, id_user: checkEmail.id_user }, 
+            SECRET_KEY, 
+            { expiresIn: "5m" }
+        );
+        
+        await sessionCreate(checkEmail.id_user, token);
+
+        res.status(201).json({ 
+            message: "Login successfully",
+            token: token,
+            id: checkEmail.id_user,
+            email: checkEmail.email
+        });
 
     } catch (error){
         console.log("Error creating user", error),

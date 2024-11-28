@@ -18,6 +18,16 @@ model User {
   liked_post liked_post[]
   pet        pet[]
   post       post[]
+  session    session[]
+}
+
+model session {
+  id         Int      @id @default(autoincrement())
+  token      String   @unique @db.VarChar(700)
+  user_id    String?   @db.Uuid
+  updated_at DateTime @updatedAt
+  User       User?    @relation(fields: [user_id], references: [id_user], onDelete: Cascade, onUpdate: NoAction)
+
 }
 
 model comments {
