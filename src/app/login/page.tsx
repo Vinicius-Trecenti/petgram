@@ -6,6 +6,7 @@ import Logo from "@/components/LogoBlack";
 
 import { useState, useEffect } from "react";
 import login from "@/api/auth/login";
+import { set } from "zod";
 
 export default function Login() {
 
@@ -14,6 +15,8 @@ export default function Login() {
 
     const [errors, setErrors] = useState<any[]>([]);
     const [successMessage, setSuccessMessage] = useState("");
+    const [alert, setAlert] = useState('');
+
 
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
@@ -23,17 +26,27 @@ export default function Login() {
         }
     }, []);
 
-    const handleLogin = () => {
-        const errors = login(email, password);
+    const handleLogin = async () => {
+        console.log(email, password)
 
-        if (errors) {
-            setErrors(errors);
-        }
-        else{
-            setErrors([]);
+        setErrors([]);
+
+        const response = await login(email, password);
+
+        if(response.alert){
+            setAlert(response.error);
         }
 
-        console.log(email, password);
+        if (!response.success) {
+            setErrors(response.errors);
+            return;
+        }
+
+        if (response.success) {
+            const successMessage = encodeURIComponent("Login realizado com sucesso!");
+            window.location.href = `/home`;
+            return;
+        }
     }
 
     const getErrorMessage = (field: string) => {
@@ -56,6 +69,10 @@ export default function Login() {
 
                 {successMessage && (
                     <p className="text-green-500 text-center mb-4">{successMessage}</p>
+                )}
+
+                {alert && (
+                    <p className="text-red-500 text-sm text-center mt-1">{alert}</p>
                 )}
 
                 <div className="">
