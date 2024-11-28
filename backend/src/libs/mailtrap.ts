@@ -34,7 +34,7 @@ export const sendEmail = async (mailOptions: MailOptions): Promise<void> =>{
 
     console.log("Email sent successfully")
   } catch (error) {
-    console.error("EError sending email", error)
+    console.error("Error sending email", error)
   }
   
 }

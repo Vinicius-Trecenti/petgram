@@ -3,9 +3,7 @@ import bcrypt from "bcrypt";
 import { RequestHandler } from "express";
 import { sessionCreate } from "../models/sessionModel";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 
-dotenv.config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
 if (!SECRET_KEY) {

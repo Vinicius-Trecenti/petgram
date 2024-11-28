@@ -11,3 +11,12 @@ export const sessionCreate = async (user_id: string, token: string) => {
     })
     return result
 }
+
+export const sessionDelete = async (token: string) => {
+    const result = await prisma.session.delete({
+        where:{
+            token
+        }
+    })
+    return result
+}
