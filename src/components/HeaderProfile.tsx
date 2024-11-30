@@ -18,7 +18,7 @@ export default function HeaderWithModal() {
             <div className="flex justify-between p-4">
                 <Logo />
                 <button onClick={openModal} className="menu-button flex gap-4">
-                    <SlMenu className="text-white w-8 h-8" />
+                    <SlMenu className="text-white w-8 h-8"/>
                 </button>
             </div>
 
@@ -33,8 +33,9 @@ export default function HeaderWithModal() {
                             <p className=" text-black text-center capitalize">Editar perfil</p>
                         </Link>
                     </div>
+                    
                     <div className="bg-branco-custom relative filter drop-shadow-lg rounded-md">
-                        <Link href="/addPet">
+                        <Link href="/registePet">
                             <p className="text-black text-center capitalize">Cadastrar Pet</p>
                         </Link>
                     </div>
