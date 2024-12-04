@@ -8,7 +8,6 @@ import { LuSend } from "react-icons/lu";
 import { FaRegBookmark } from "react-icons/fa6";
 
 import { useState } from "react";
-import Link from "next/link";
 
 interface PostComponentProps {
     profile_picture: string;
@@ -27,10 +26,9 @@ export default function PostComponent({ profile_picture, username, post_url, des
     }
 
     return (
-        <div className="bg-white mx-4 my-2 rounded-lg">
+        <div className="bg-white mx-4 my-2 rounded-lg text-black">
             <div className="flex items-center gap-2 ml-2 mt-2">
                 <img src={profile_picture} alt="" className="w-12 h-12 rounded-full" />
-
                 <p className="font-bold">{username}</p>
             </div>
 
