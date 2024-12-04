@@ -18,6 +18,8 @@ model User {
   liked_post liked_post[]
   pet        pet[]
   post       post[]
+
+  @@map("users")
 }
 
 model comments {
