@@ -6,7 +6,6 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
-
 dotenv.config();
 
 app.get('/', (req: Request, res: Response)=> {
