@@ -1,6 +1,5 @@
-import path from "path";
 import { z } from "zod";
-
+import Cookies from "js-cookie";
 const validate = z.object({
     email: z.string().email("Por favor, insira um email válido."),
     password: z.string().min(8, "A senha deve ter pelo menos 8 caracteres."),
@@ -43,7 +42,17 @@ export default async function login(email: string, password: string) {
         }
 
         const responseData = await response.json();
+        responseData.token = "tokenteste";
 
+        Cookies.set("token", responseData.token,
+            {
+                expires: 7,
+                secure: true,
+                sameSite: "strict",
+            }
+        );
+
+        console.log(responseData)
         return { success: true, data: responseData };
 
     }
