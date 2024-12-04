@@ -2,11 +2,13 @@ import express, { Request, Response} from 'express';
 import mainRouter from './routers/main';
 import cors from 'cors';
 import postRouter from './routers/postRouter';
+import dotenv from 'dotenv';
 
 const app = express();
 const PORT = 4000;
 
 app.use(express.json());
+dotenv.config();
 
 app.use(cors({
     origin: 'http://localhost:3000', // Permitir o acesso do frontend
