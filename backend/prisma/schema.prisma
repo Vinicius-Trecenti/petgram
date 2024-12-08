@@ -8,64 +8,62 @@ datasource db {
 }
 
 model User {
-  id_user           String       @id @default(uuid()) @db.Uuid
-  email             String       @unique @db.VarChar(100)
-  fullname          String       @db.VarChar(50)
-  username          String       @db.VarChar(20)
-  password          String       @db.VarChar(255)
-  photo_user        String?      @db.VarChar(255)
-  bio               String?      @db.VarChar(120)
-  liked_post        liked_post[]
-  pet               pet[]
-  post              post[]
-  refresh_token     RefreshToken?
+  id_user       String        @id @default(uuid()) @db.Uuid
+  email         String        @unique @db.VarChar(100)
+  fullname      String        @db.VarChar(50)
+  username      String        @db.VarChar(20)
+  password      String        @db.VarChar(255)
+  photo_user    String?       @db.VarChar(255)
+  bio           String?       @db.VarChar(120)
+  liked_post    liked_post[]
+  pet           pet[]
+  post          post[]
+  refresh_token RefreshToken?
 
   @@map("users")
 }
 
 model RefreshToken {
-  id                String      @id @default(uuid())
-  expiresIn         Int 
-  user              User        @relation(fields: [userId], references: [id_user])
-  userId            String      @unique @db.Uuid
+  id        String @id @default(uuid())
+  expiresIn Int
+  userId    String @unique @db.Uuid
+  user      User   @relation(fields: [userId], references: [id_user])
 
   @@map("refresh_token")
 }
 
-
 model comments {
-  id_comment      Int    @id @default(autoincrement())
-  id_post         Int
-  comment         String @db.VarChar(150)
-  post            post   @relation(fields: [id_post], references: [id_post], onDelete: NoAction, onUpdate: NoAction)
+  id_comment Int    @id @default(autoincrement())
+  id_post    Int
+  comment    String @db.VarChar(150)
+  post       post   @relation(fields: [id_post], references: [id_post], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model liked_post {
-  id_liked_post   Int     @id @default(autoincrement())
-  id_post         Int?
-  id_user         String? @db.Uuid
-  post            post?   @relation(fields: [id_post], references: [id_post], onDelete: NoAction, onUpdate: NoAction)
-  User            User?   @relation(fields: [id_user], references: [id_user], onDelete: NoAction, onUpdate: NoAction)
+  id_liked_post Int     @id @default(autoincrement())
+  id_post       Int?
+  id_user       String? @db.Uuid
+  post          post?   @relation(fields: [id_post], references: [id_post], onDelete: NoAction, onUpdate: NoAction)
+  User          User?   @relation(fields: [id_user], references: [id_user], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model pet {
-  id_pet          Int     @id @default(autoincrement())
-  id_dog_owner    String  @db.Uuid
-  name_pet        String  @db.VarChar(50)
-  photo_pet       String? @db.VarChar(255)
-  type_pet        String? @db.VarChar(50)
-  pet_bio         String? @db.VarChar(150)
-  User            User    @relation(fields: [id_dog_owner], references: [id_user], onDelete: NoAction, onUpdate: NoAction)
+  id_pet       Int     @id @default(autoincrement())
+  id_dog_owner String  @db.Uuid
+  name_pet     String  @db.VarChar(50)
+  photo_pet    String? @db.VarChar(255)
+  type_pet     String? @db.VarChar(50)
+  pet_bio      String? @db.VarChar(150)
+  User         User    @relation(fields: [id_dog_owner], references: [id_user], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model post {
-  id_post         Int          @id @default(autoincrement())
-  id_user         String?      @db.Uuid
-  photo_post      String       @db.VarChar(255)
-  description     String       @db.VarChar(150)
-  like_post       Boolean?     @default(false)
-  comments        comments[]
-  liked_post      liked_post[]
-  User            User?        @relation(fields: [id_user], references: [id_user], onDelete: NoAction, onUpdate: NoAction)
+  id_post     Int          @id @default(autoincrement())
+  id_user     String?      @db.Uuid
+  description String?      @db.VarChar(150)
+  like_post   Boolean?     @default(false)
+  photo_post  String[]     
+  comments    comments[]
+  liked_post  liked_post[]
+  User        User?        @relation(fields: [id_user], references: [id_user], onDelete: NoAction, onUpdate: NoAction)
 }
-
