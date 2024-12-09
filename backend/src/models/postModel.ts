@@ -17,3 +17,12 @@ export const createPost = async (post: postInput) => {
      })
      return result;
 }
+
+export const getAllPosts = async () =>{
+    const result =  await prisma.post.findMany({
+        orderBy:{
+            id_post: 'desc'
+        }
+    })
+    return result
+}
