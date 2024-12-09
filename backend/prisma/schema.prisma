@@ -19,6 +19,7 @@ model User {
   pet           pet[]
   post          post[]
   refresh_token RefreshToken?
+  comment       comments[]
 
   @@map("users")
 }
@@ -34,9 +35,11 @@ model RefreshToken {
 
 model comments {
   id_comment Int    @id @default(autoincrement())
-  id_post    Int
+  post_id    Int
+  user_id    String @db.Uuid
   comment    String @db.VarChar(150)
-  post       post   @relation(fields: [id_post], references: [id_post], onDelete: NoAction, onUpdate: NoAction)
+  post       post   @relation(fields: [post_id], references: [id_post], onDelete: NoAction, onUpdate: NoAction)
+  User       User   @relation(fields: [user_id], references: [id_user], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model liked_post {

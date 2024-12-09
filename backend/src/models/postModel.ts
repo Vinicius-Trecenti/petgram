@@ -26,3 +26,30 @@ export const getAllPosts = async () =>{
     })
     return result
 }
+
+export const createComment = async (post_id: number, user_id: string, comment: string) => {
+    const result = await prisma.comments.create({
+        data: {
+            post_id,
+            user_id,
+            comment
+        }
+    })
+    return result
+}
+
+export const getComment = async (post_id: number) => {
+    const result = await prisma.comments.findMany({
+        where: {
+            post_id
+        },
+        orderBy: {
+            post_id: 'desc'
+        },
+        select: {
+            comment: true
+        }
+    })
+    return result;
+}
+
