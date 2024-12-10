@@ -9,7 +9,7 @@ export interface userInput {
     username: string,
     password: string,
     photo_user?: string,
-    bio?: string    
+    bio?: string
 }
 
 
@@ -26,7 +26,7 @@ export const userSchema = z.object({
     .max(255, {message: "The password must be a maximum of 255 caracteres"})
 });
 
-type userSchemaType = z.infer<typeof userSchema>;
+
 
 export const userCreate = async (user: userInput) => {
     const result = await prisma.user.create({
@@ -35,24 +35,19 @@ export const userCreate = async (user: userInput) => {
     return result
 }
 
-// export const userUpdate = async (user: userInput) => {
-//     const result = await prisma.user.update({
-//         where: {
-//             id_user: user.
-//         },
-//         data: {
-//             username: user.username,
-//             photo_user: user.photoUser,
-//             bio: user.bio
-//         }
-//     })
-//     return result;
-//}
-
 export const findEmail = async (email: string) => {
     const result = await prisma.user.findUnique({
         where: {
-            email: email
+            email,
+        }
+    })
+    return result
+}
+
+export const getById = async (id_user: string) => {
+    const result = await prisma.user.findUnique({
+        where: {
+            id_user,
         }
     })
     return result

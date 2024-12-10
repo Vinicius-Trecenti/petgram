@@ -35,7 +35,29 @@ export default function Home() {
     useEffect(() => {
         async function fetchPosts() {
             try {
-                const response = await fetch('http://localhost:4000/posts'); //mudar aqui a rota da chamada
+                const token = Cookies.get("token"); // Pega o token dos cookies
+
+                if (!token) {
+                    console.log("Token não encontrado. Redirecionando para login...");
+                    window.location.href = "/login"; // Redireciona para o login se não tiver token
+                    return;
+                }
+
+                const response = await fetch("http://localhost:4000/posts", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`, // Envia o token no cabeçalho
+                    },
+                });
+
+                if (!response.ok) {
+                    // Caso a resposta não seja OK, você pode lidar com erros de token expirado ou outros
+                    console.log("Erro ao buscar posts:", response.status);
+                    window.location.href = "/login"; // Redireciona se ocorrer um erro de autenticação
+                    return;
+                }
+
                 const data = await response.json();
                 setPosts(data);
                 const token = Cookies.get("token");
@@ -78,7 +100,7 @@ export default function Home() {
                     setLoggedInUser(userData.username);
                 }
             } catch (error) {
-                console.error('Erro ao buscar posts:', error);
+                console.error("Erro ao buscar posts:", error);
             }
         }
 

@@ -1,7 +1,5 @@
 import nodemailer, { Transporter } from "nodemailer";
-import dotenv from "dotenv";
 
-dotenv.config();
 
 const transporter: Transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -34,7 +32,7 @@ export const sendEmail = async (mailOptions: MailOptions): Promise<void> =>{
 
     console.log("Email sent successfully")
   } catch (error) {
-    console.error("EError sending email", error)
+    console.error("Error sending email", error)
   }
   
 }
