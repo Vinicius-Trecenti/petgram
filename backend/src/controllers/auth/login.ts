@@ -27,7 +27,7 @@ export const loginWithEmail: RequestHandler = async (req, res, next) => {
       return;
     }
     
-    const token = generateTokenProvider(checkEmail.id_user);
+    const token = generateTokenProvider(checkEmail.id_user, checkEmail.username, checkEmail.photo_user ?? "");
     
     clearOldRefreshToken(checkEmail.id_user);
 
