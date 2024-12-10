@@ -8,23 +8,29 @@ datasource db {
 }
 
 model User {
-  id_user    String       @id @default(uuid()) @db.Uuid
-  email      String       @unique @db.VarChar(100)
-  fullname   String       @db.VarChar(50)
-  username   String       @db.VarChar(20)
-  password   String       @db.VarChar(255)
-  photo_user String?      @db.VarChar(255)
-  bio        String?      @db.VarChar(120)
-  liked_post liked_post[]
-  pet        pet[]
-  post       post[]
+  id_user       String         @id @default(uuid()) @db.Uuid
+  email         String         @unique @db.VarChar(100)
+  fullname      String         @db.VarChar(50)
+  username      String         @db.VarChar(20)
+  password      String         @db.VarChar(255)
+  photo_user    String?        @db.VarChar(255)
+  bio           String?        @db.VarChar(120)
+  comments      comments[]
+  liked_post    liked_post[]
+  pet           pet[]
+  post          post[]
+  refresh_token refresh_token?
+
+  @@map("users")
 }
 
 model comments {
   id_comment Int    @id @default(autoincrement())
-  id_post    Int
   comment    String @db.VarChar(150)
-  post       post   @relation(fields: [id_post], references: [id_post], onDelete: NoAction, onUpdate: NoAction)
+  post_id    Int
+  user_id    String @db.Uuid
+  post       post   @relation(fields: [post_id], references: [id_post], onDelete: NoAction, onUpdate: NoAction)
+  users      User   @relation(fields: [user_id], references: [id_user], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model liked_post {
@@ -48,10 +54,17 @@ model pet {
 model post {
   id_post     Int          @id @default(autoincrement())
   id_user     String?      @db.Uuid
-  photo_post  String       @db.VarChar(255)
-  description String       @db.VarChar(150)
+  description String?      @db.VarChar(150)
   like_post   Boolean?     @default(false)
+  photo_post  String[]
   comments    comments[]
   liked_post  liked_post[]
   User        User?        @relation(fields: [id_user], references: [id_user], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model refresh_token {
+  id        String @id
+  expiresIn Int
+  userId    String @unique @db.Uuid
+  users     User   @relation(fields: [userId], references: [id_user])
 }
