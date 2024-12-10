@@ -10,7 +10,7 @@ import cors from 'cors';
 const app = express();
 app.use(logger)
 
-const PORT = 3000;
+const PORT = 4000;
 
 app.use(express.json());
 dotenv.config();
