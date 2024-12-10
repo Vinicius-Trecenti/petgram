@@ -23,10 +23,13 @@ export const auth: RequestHandler = async (req, res, next) => {
     req.user = decodedToken;
     next();
     return;
+
   } catch (error) {
+
     console.error("Error decoding token:", error);
     res.status(401).json({ message: "Token invalid or expired" });
     return;
+    
   }
 }
 declare global {

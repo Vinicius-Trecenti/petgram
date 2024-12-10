@@ -10,7 +10,6 @@ cloudinary.config({
 });
 
 export const uploadFiles: RequestHandler = async (req, res, next) => {
-    console.log('entrou no upload');
       
     try{
         const files = req.files as Express.Multer.File[];
@@ -18,12 +17,11 @@ export const uploadFiles: RequestHandler = async (req, res, next) => {
             res.status(400).json({ message: "No files uploaded" });
             return;
         }
-        console.log(files);
 
         const imageUrls: string[] = [];
 
         for (const image of files) {
-            console.log('loop');
+            
             const result = await cloudinary.uploader.upload(image.path, {
                 folder: 'posts',
                 resource_type: 'image',
@@ -32,8 +30,7 @@ export const uploadFiles: RequestHandler = async (req, res, next) => {
             imageUrls.push(result.secure_url);
             
             await fs.unlink(image.path);
-            console.log('loop');
-
+        
         }
         
         
