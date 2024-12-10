@@ -1,8 +1,8 @@
 import { Request, Response} from "express";
 import dayjs from "dayjs";
-import { generateTokenProvider } from "../libs/generateTokenProvider";
-import { generateRefreshToken } from "../libs/generateRefreshTokenProvider";
-import { getRefreshToken, deleteRefreshToken } from "../models/refreshTokenModel";
+import { generateTokenProvider } from "../../libs/generateTokenProvider";
+import { generateRefreshToken } from "../../libs/generateRefreshTokenProvider";
+import { getRefreshToken, deleteRefreshToken } from "../../models/refreshTokenModel";
 
 
 

@@ -1,9 +1,9 @@
-import { findEmail } from "../models/userModel";
+import { findEmail } from "../../models/userModel";
 import { RequestHandler } from "express";
 import bcrypt from "bcrypt";
-import { generateTokenProvider } from "../libs/generateTokenProvider";
-import { generateRefreshToken } from "../libs/generateRefreshTokenProvider";
-import { clearOldRefreshToken } from "../libs/clearOldRefreshToken";
+import { generateTokenProvider } from "../../libs/generateTokenProvider";
+import { generateRefreshToken } from "../../libs/generateRefreshTokenProvider";
+import { clearOldRefreshToken } from "../../libs/clearOldRefreshToken";
 
 export const loginWithEmail: RequestHandler = async (req, res, next) => {
   try {

@@ -1,11 +1,16 @@
 import express, { Request, Response} from 'express';
 import mainRouter from './routers/main';
-import cors from 'cors';
 import postRouter from './routers/postRouter';
+import errorHandler from './middleware/errorHandler';
+import logger from './middleware/logger';
 import dotenv from 'dotenv';
+import cors from 'cors';
+
 
 const app = express();
-const PORT = 4000;
+app.use(logger)
+
+const PORT = 3000;
 
 app.use(express.json());
 dotenv.config();
@@ -22,7 +27,7 @@ app.get('/', (req: Request, res: Response)=> {
 
 app.use('/mainRoutes', mainRouter);
 
-app.use('/posts', postRouter);
+app.use(errorHandler);
 
 app.listen(PORT, ()=> {
     console.log(`Server running on port ${PORT}`);
