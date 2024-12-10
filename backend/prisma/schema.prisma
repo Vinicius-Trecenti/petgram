@@ -15,11 +15,11 @@ model User {
   password      String        @db.VarChar(255)
   photo_user    String?       @db.VarChar(255)
   bio           String?       @db.VarChar(120)
+  comment       comments[]
   liked_post    liked_post[]
   pet           pet[]
   post          post[]
   refresh_token RefreshToken?
-  comment       comments[]
 
   @@map("users")
 }
@@ -35,9 +35,9 @@ model RefreshToken {
 
 model comments {
   id_comment Int    @id @default(autoincrement())
+  comment    String @db.VarChar(150)
   post_id    Int
   user_id    String @db.Uuid
-  comment    String @db.VarChar(150)
   post       post   @relation(fields: [post_id], references: [id_post], onDelete: NoAction, onUpdate: NoAction)
   User       User   @relation(fields: [user_id], references: [id_user], onDelete: NoAction, onUpdate: NoAction)
 }
@@ -65,7 +65,7 @@ model post {
   id_user     String?      @db.Uuid
   description String?      @db.VarChar(150)
   like_post   Boolean?     @default(false)
-  photo_post  String[]     
+  photo_post  String[]
   comments    comments[]
   liked_post  liked_post[]
   User        User?        @relation(fields: [id_user], references: [id_user], onDelete: NoAction, onUpdate: NoAction)

@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export const clearOldRefreshToken = async (userId: string) => {
 
-    const clearRefreshToken = await prisma.refreshToken.delete({
+    const clearRefreshToken = await prisma.refreshToken.deleteMany({
         where: {
             userId,
         },
