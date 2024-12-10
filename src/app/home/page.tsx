@@ -1,42 +1,89 @@
-import Carrossel from "@/components/Carrossel";
+'use client';
+
 import HeaderHome from "@/components/HeaderHome";
 import NavbarMobile from "@/components/NavbarMobile";
 import PostComponent from "@/components/PostComponent";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+
+
+interface Post {
+    id_post: number;
+    photo_post: string;
+    description: string;
+    like_post: boolean;
+    User: {
+        id_user: string;
+        username: string; // Certifique-se de que o modelo User tem este campo
+        profile_picture: string; // Idem
+    };
+    comments: Array<{
+        id_comment: number;
+        content: string;
+    }>;
+    liked_post: Array<{
+        id_like: number;
+        id_user: string;
+    }>;
+}
 
 export default function Home() {
+
+    const [posts, setPosts] = useState<Post[]>([]);
+
+    useEffect(() => {
+        async function fetchPosts() {
+            try {
+                const token = Cookies.get("token"); // Pega o token dos cookies
+
+                if (!token) {
+                    console.log("Token não encontrado. Redirecionando para login...");
+                    window.location.href = "/login"; // Redireciona para o login se não tiver token
+                    return;
+                }
+
+                const response = await fetch("http://localhost:4000/posts", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`, // Envia o token no cabeçalho
+                    },
+                });
+
+                if (!response.ok) {
+                    // Caso a resposta não seja OK, você pode lidar com erros de token expirado ou outros
+                    console.log("Erro ao buscar posts:", response.status);
+                    window.location.href = "/login"; // Redireciona se ocorrer um erro de autenticação
+                    return;
+                }
+
+                const data = await response.json();
+                setPosts(data);
+            } catch (error) {
+                console.error("Erro ao buscar posts:", error);
+            }
+        }
+
+        fetchPosts();
+    }, []);
+
     return (
         <div className="flex flex-col min-h-screen justify-center pt-20 pb-24">
             <div className="fixed top-0 w-full z-10">
                 <HeaderHome />
             </div>
 
-            {/* <Carrossel /> */}
-
-            <div className="flex flex-col flex-grow justify-center">
-                <PostComponent
-                    username="Bolte"
-                    profile_picture="https://random.dog/c61a3df2-abe3-4b0a-84ee-d036f8696814.jpg"
-                    post_url="https://random.dog/c61a3df2-abe3-4b0a-84ee-d036f8696814.jpg"
-                    description="Vim ajudar o humano no mercado, mas já cansei… alguém viu onde fica a seção de petiscos? 🐾🛒"
-                    likes={1000}
-                />
-
-                <PostComponent
-                    username="Cripto"
-                    profile_picture="https://random.dog/2d394360-33e1-4c27-9e64-d65a2ab82d5b.jpg"
-                    post_url="https://random.dog/2d394360-33e1-4c27-9e64-d65a2ab82d5b.jpg"
-                    description="Dia de estudos! 📚🐾 Já sei sentar, deitar e rolar... agora só falta entender essa tal de matemática humana!"
-                    likes={642}
-                />
-
-                <PostComponent
-                    username="Spike & Lana"
-                    profile_picture="https://random.dog/c1efdc4c-5691-4823-9e66-fd9eeab3ce96.jpg"
-                    post_url="https://random.dog/c1efdc4c-5691-4823-9e66-fd9eeab3ce96.jpg"
-                    description=" Nosso amor é como um osso: duradouro e irresistível! 🐾❤️"
-                    likes={642}
-                />
-
+            <div>
+                {posts.map((post) => (
+                    <PostComponent
+                        key={post.id_post}
+                        profile_picture={post.User?.profile_picture || ''}
+                        username={post.User?.username || 'Anônimo'}
+                        post_url={post.photo_post}
+                        description={post.description}
+                        likes={post.liked_post.length}
+                    />
+                ))}
             </div>
 
             <div className="fixed bottom-0 w-full">

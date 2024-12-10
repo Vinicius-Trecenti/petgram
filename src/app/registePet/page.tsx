@@ -12,9 +12,6 @@ export default function page() {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     const userPicture = <img src="https://random.dog/c1efdc4c-5691-4823-9e66-fd9eeab3ce96.jpg" alt="" className="w-full h-full object-cover rounded-full"></img>;
-    const realName = 'placeholder';
-    const userName = 'placeholder';
-    const userBio = 'placeholder';
 
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setText(event.target.value);
@@ -31,7 +28,7 @@ export default function page() {
     return (
         <div className="flex flex-col justify-center items-center pt-14 pb-16 bg-branco-custom" style={{ minHeight: '80vh' }}>
 
-            <HeaderComponent text="Editar Perfil" />
+            <HeaderComponent text="Cadastrar Pet" />
 
             <div className="grid justify-center items-center gap-8 p-8">
 
@@ -69,18 +66,18 @@ export default function page() {
                     </label>
                     <input
                         type="text"
-                        placeholder={realName}
+                        placeholder="Digite aqui"
                         className="w-full pt-6 p-2 border border-solid border-gray-300 focus:border-blue-500 focus:outline-none rounded-lg py-1 px-3 text-black"
                     />
                 </div>
 
                 <div className="relative w-full">
                     <label className="absolute top-0 left-3 text-gray-600 text-sm">
-                        Nome de Usuario
+                        Raça
                     </label>
                     <input
                         type="text"
-                        placeholder={userName}
+                        placeholder="Digite aqui"
                         className="w-full pt-6 p-2 border border-solid border-gray-300 focus:border-blue-500 focus:outline-none rounded-lg py-1 px-3 text-black"
                     />
                 </div>
@@ -92,7 +89,7 @@ export default function page() {
                     <textarea
                         className="w-full pt-6 p-2 border border-solid border-gray-300 focus:border-blue-500 focus:outline-none rounded-lg py-1 px-3 resize-none filter drop-shadow-md text-black"
                         rows={4}
-                        placeholder={userBio}
+                        placeholder="Digite aqui"
                         value={text}
                         onChange={handleChange}
                     ></textarea>

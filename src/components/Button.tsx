@@ -1,11 +1,12 @@
 interface ButtonProps {
     text: string
+    onClick?: () => void
 }
 
-export default function Button({ text }: ButtonProps) {
+export default function Button({ text, onClick }: ButtonProps) {
 
     return (
-        <button className="bg-green-700 hover:bg-green-400 text-white font-bold p-2 rounded">
+        <button onClick={onClick} className="bg-green-700 hover:bg-green-400 text-white font-bold p-2 rounded">
             {text}
         </button>
     );

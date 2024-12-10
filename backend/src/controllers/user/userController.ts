@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 
 
 export const createUser: RequestHandler = async (req, res)=>{
-    
+
     const user = req.body;
 
     const validateUserData = userSchema.safeParse(user);

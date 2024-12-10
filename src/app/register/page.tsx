@@ -1,8 +1,48 @@
-import Logo from "@/components/Logo";
+'use client';
+
+import Logo from "@/components/LogoBlack";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 
+import { useState } from "react";
+import register from "@/api/auth/register";
+
 export default function Register() {
+
+    const [email, setEmail] = useState('');
+    const [fullname, setfullname] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [alert, setAlert] = useState('');
+
+    const [errors, setErrors] = useState<any[]>([]);
+
+    const handleRegister = async () => {
+        setErrors([]);
+
+        const response = await register(email, fullname, username, password);
+
+        if(!response.success) {
+            setErrors(response.errors);
+            return;
+        }
+
+        if (response.success) {
+            const successMessage = encodeURIComponent("Cadastro realizado com sucesso!");
+            window.location.href = `/login?successMessage=${successMessage}`;
+            return;
+        }
+
+    }
+
+    const getErrorMessage = (field: string) => {
+        if (!Array.isArray(errors)) return '';
+
+        const error = errors.find((err) => err.path.includes(field));
+        return error ? error.message : '';
+    };
+
+
     return (
         <div className="flex flex-col min-h-screen justify-center">
 
@@ -26,10 +66,38 @@ export default function Register() {
                     <hr className="w-full border-1"/>
                 </div>
 
-                <Input text="Phone number or email" type="email"/>
-                <Input text="Full name" type="name"/>
-                <Input text="Username" type="username"/>
-                <Input text="Password" type="password"/>
+                {alert && (
+                    <p className="text-red-500 text-sm text-center mt-1">{alert}</p>
+                )}
+
+                <div className="">
+                    <Input text="Email" type="email" onChange={(e) => setEmail(e.target.value)}/>
+                    {getErrorMessage("email") && (
+                        <p className="text-red-500 text-sm mt-1">{getErrorMessage("email")}</p>
+                    )}
+                </div>
+
+                <div className="">
+                    <Input text="Full name" type="fullname" onChange={(e) => setfullname(e.target.value)}/>
+                    {getErrorMessage("fullname") && (
+                        <p className="text-red-500 text-sm mt-1">{getErrorMessage("fullname")}</p>
+                    )}
+                </div>
+
+                <div className="">
+                    <Input text="Username" type="username" onChange={(e) => setUsername(e.target.value)}/>
+                    {getErrorMessage("username") && (
+                        <p className="text-red-500 text-sm mt-1">{getErrorMessage("username")}</p>
+                    )}
+                </div>
+
+                <div className="">
+                    <Input text="Password" type="password" onChange={(e) => setPassword(e.target.value)}/>
+                    {getErrorMessage("password") && (
+                        <p className="text-red-500 text-sm mt-1">{getErrorMessage("password")}</p>
+                    )}
+                </div>
+
 
                 <p className="text-center font-medium mt-4">
                     As pessoas que usam nosso serviço podem ter enviado suas informações de contato para o Instagram. <a className="text-green-500">Saiba mais</a>
@@ -39,7 +107,7 @@ export default function Register() {
                 Ao se cadastrar, você concorda com nossos <a href="" className="text-green-500">Termos</a>, <a href="" className="text-green-500">Política de Privacidade</a> e <a href="" className="text-green-500">Política de Cookies</a>.
                 </p>
 
-                <Button text="Sing Up"/>
+                <Button text="Sing Up" onClick={handleRegister}/>
 
             </div>
 

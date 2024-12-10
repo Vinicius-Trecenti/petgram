@@ -18,7 +18,7 @@ export default function HeaderWithModal() {
             <div className="flex justify-between p-4">
                 <Logo />
                 <button onClick={openModal} className="menu-button flex gap-4">
-                    <SlMenu className="text-white w-8 h-8" />
+                    <SlMenu className="text-white w-8 h-8"/>
                 </button>
             </div>
 
@@ -27,15 +27,26 @@ export default function HeaderWithModal() {
                     <button onClick={closeModal} className="flex justify-end ">
                         <SlMenu className="text-verde-custom w-8 h-8" />
                     </button>
+
+                    <div className="bg-branco-custom relative filter drop-shadow-lg rounded-md">
+                        <Link href="/editProfile">
+                            <p className=" text-black text-center capitalize">Editar perfil</p>
+                        </Link>
+                    </div>
                     
-                    <Link href="/editProfile">
-                        <p className=" text-black text-center capitalize">Editar perfil</p>
-                    </Link>
-                    <Link href="/newPost">
-                        <p className="text-black text-center capitalize">Cadastrar Pet</p>
-                    </Link>
+                    <div className="bg-branco-custom relative filter drop-shadow-lg rounded-md">
+                        <Link href="/registePet">
+                            <p className="text-black text-center capitalize">Cadastrar Pet</p>
+                        </Link>
+                    </div>
+
+                    {/* Mudar o onclick do botão para deslogar o usuário /> */}
+                    <button onClick={closeModal} className="bg-branco-custom relative filter drop-shadow-lg rounded-md">
+                        <p className="text-black text-center capitalize">Sair</p>
+                    </button>
                 </div>
             </Modal>
+            
         </div>
     );
 }

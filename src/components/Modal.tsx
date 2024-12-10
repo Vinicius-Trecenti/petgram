@@ -12,7 +12,7 @@ const Modal: React.ComponentType<ModalProps> = ({ isOpen, onClose, children }) =
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="close-button" onClick={onClose}>X</button>
+        <button className="close-button" onClick={onClose}></button>
         {children}
       </div>
       <style jsx>{`
@@ -28,13 +28,14 @@ const Modal: React.ComponentType<ModalProps> = ({ isOpen, onClose, children }) =
           z-index: 1000;
         }
         .modal-content {
-          background: white;
+          background: #ffffff;
           padding: 20px;
           border-radius: 8px;
           position: relative;
           width: 40%;
           max-width: 500px;
-        }
+          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
         .close-button {
           position: absolute;
           top: 10px;

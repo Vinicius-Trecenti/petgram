@@ -9,7 +9,7 @@ export interface userInput {
     username: string,
     password: string,
     photo_user?: string,
-    bio?: string    
+    bio?: string
 }
 
 
