@@ -7,6 +7,7 @@ import { uploadFiles } from '../middleware/uploadFiles';
 import { createCommentController } from '../controllers/post/createCommentController';
 import { getCommentController } from '../controllers/post/getCommentsController';
 import { updatePostController } from '../controllers/post/updatePostController';
+import { deletePostController } from '../controllers/post/deletePostController';
 
 export const postRouter = Router();
 
@@ -15,5 +16,6 @@ export const postRouter = Router();
     postRouter.post('/comment', createCommentController);
     postRouter.get('/getComments', getCommentController);
     postRouter.put('/updatePost', auth, upload.array('files'), uploadFiles, updatePostController);
+    postRouter.delete('/deletePost', auth,deletePostController);
     
 

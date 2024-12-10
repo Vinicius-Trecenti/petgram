@@ -11,14 +11,4 @@ const mainRouter = Router();
     mainRouter.use('/refreshtoken', refreshTokenFunction);
     mainRouter.use('/post', postRouter);
 
-
-    mainRouter.get('/courses', auth,(Request, Response) => {Response.send([
-            {id: 1, post: 'papagaio'},
-            {id: 2, post: 'cachorro'},
-            {id: 3, post: 'gato'},
-            {id: 4, post: 'peixe'},
-            {id: 5, post: 'lemure'}
-        ]);
-    });
-
 export default mainRouter;
