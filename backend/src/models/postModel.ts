@@ -1,4 +1,4 @@
- import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
  const prisma = new PrismaClient();
  export interface postInput {
@@ -53,3 +53,26 @@ export const getComment = async (post_id: number) => {
     return result;
 }
 
+export const deletePost = async (id_post: number) => {
+    const result =  await prisma.post.delete({
+        where:{
+            id_post
+        }
+    })
+    return result;
+}
+
+export const updatePost = async (id_post: number, photo_post: string[], description: string) => {
+    const result = await prisma.post.update({
+        where: {
+                id_post,
+        },
+        data: {
+            photo_post,
+            description
+
+        }
+    })
+
+    return result;
+}
