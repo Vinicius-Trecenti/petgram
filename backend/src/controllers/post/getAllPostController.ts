@@ -1,9 +1,11 @@
 import { RequestHandler } from "express";
-import { getAllPosts } from "../../models/postModel"
+import { getAllPosts } from "../../models/postModel";
+import { compareId } from "../../models/postModel";
 export const getAllPostsController: RequestHandler = async (req, res) => {
 
     try {
-        const returnPosts = await getAllPosts()
+
+        const returnPosts = await compareId()
         res.status(200).json(returnPosts)
         return;
     } catch (error: any) {

@@ -76,3 +76,17 @@ export const updatePost = async (id_post: number, photo_post: string[], descript
 
     return result;
 }
+
+export const compareId = async () => {
+    
+    const result = await prisma.post.findMany({
+        include: {
+            User: {
+                select: {
+                    username: true
+                }
+            }
+        }
+    })
+    return result
+}
