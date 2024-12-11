@@ -9,6 +9,10 @@ import { FaRegBookmark } from "react-icons/fa6";
 
 import { useState } from "react";
 
+import { CiEdit } from "react-icons/ci";
+import { MdDelete } from "react-icons/md";
+
+
 interface PostComponentProps {
     profile_picture: string;
     username: string;
@@ -27,12 +31,24 @@ export default function PostComponent({ profile_picture, username, post_url, des
 
     return (
         <div className="bg-white mx-4 my-2 rounded-lg text-black">
-            <div className="flex items-center gap-2 ml-2 mt-2">
-                <img src={profile_picture} alt="" className="w-12 h-12 rounded-full" />
-                <p className="font-bold">{username}</p>
+            <div className="flex justify-between items-center gap-2 ml-2 mt-2">
+                <div className="flex items-center mt-2">
+                    <img src={profile_picture} alt="" className="w-12 h-12 rounded-full" />
+                    <p className="font-bold">{username}</p>
+                </div>
+
+
+                <div className="flex justify-between gap-2">
+                    <button>
+                        <CiEdit className="w-6 h-6 text-blue-400"/>
+                    </button>
+                    <button>
+                        <MdDelete className="w-6 h-6 text-red-400" />
+                    </button>
+                </div>
             </div>
 
-            <img src={post_url} alt="" className=" p-2 mt-2" />
+            <img src={post_url} alt="" className=" p-2 mt-2"  />
 
             <div className="flex justify-between p-2">
                 <div className="flex items-center gap-4">
