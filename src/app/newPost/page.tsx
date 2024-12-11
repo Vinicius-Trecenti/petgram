@@ -47,9 +47,11 @@ export default function page() {
             const data = await response.json();
 
             if (response.ok) {
-                alert("Post criado com sucesso!");
+                // alert("Post criado com sucesso!");
                 setText(''); // Limpa o campo de descrição
                 setSelectedImage(null); // Limpa a imagem
+                window.location.href = `/home`;
+
             } else {
                 alert("Erro ao criar post: " + data.error);
             }
