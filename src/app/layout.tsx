@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Nunito } from "next/font/google";
+import { ToastContainer } from "react-toastify";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
   return (
     <html lang="en">
       <body className={`${nunito.className} bg-[#f1f1f3] antialiased `} >
+        <ToastContainer />
         {children}
       </body>
     </html>

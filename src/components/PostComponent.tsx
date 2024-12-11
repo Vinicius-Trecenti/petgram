@@ -10,6 +10,8 @@ import { MdDelete } from "react-icons/md";
 
 import { useState } from "react";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Estilos do React Toastify
 
 interface PostComponentProps {
     id_post: number;
@@ -26,13 +28,14 @@ export default function PostComponent({ id_post, profile_picture, username, post
 
     const handleLike = () => {
         setLiked(!liked);
+        toast.success(liked ? "Post descurtido!" : "Post curtido!"); // Notificação de curtir/descurtir
     };
 
     const handleDelete = async () => {
         const token = Cookies.get("token");
 
         if (!token) {
-            alert("Token não encontrado. Redirecionando para login...");
+            toast.error("Token não encontrado. Redirecionando para login...");
             window.location.href = "/login"; // Redireciona para o login se não tiver token
             return;
         }
@@ -48,16 +51,17 @@ export default function PostComponent({ id_post, profile_picture, username, post
             });
 
             if (!response.ok) {
-                console.log("Erro ao deletar post:", response.status);
+                const errorData = await response.json();
+                toast.error(`Erro: ${errorData.message}`); // Exibe mensagem de erro
+                console.error("Erro ao deletar post:", response.status, errorData.message);
                 return;
             }
 
-            // Chamando o onDelete do pai para atualizar a lista de posts
-            onDelete(id_post);
-            alert("Post deletado com sucesso!");
-
+            onDelete(id_post); // Atualiza a lista de posts no componente pai
+            toast.success("Post deletado com sucesso!");
         } catch (error) {
             console.error("Erro ao deletar o post:", error);
+            toast.error("Erro ao deletar o post. Tente novamente.");
         }
     };
 
@@ -79,7 +83,7 @@ export default function PostComponent({ id_post, profile_picture, username, post
                 </div>
             </div>
 
-            <img src={post_url} alt="" className=" p-2 mt-2"  />
+            <img src={post_url} alt="" className=" p-2 mt-2" />
 
             <div className="flex justify-between p-2">
                 <div className="flex items-center gap-4">
