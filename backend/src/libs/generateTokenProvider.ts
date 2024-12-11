@@ -2,9 +2,12 @@ import jwt from "jsonwebtoken";
 
 const SECRET_KEY = process.env.SECRET_KEY as string;
 
-export const generateTokenProvider = (userId: string) => {
+export const generateTokenProvider = (userId: string, username: string, photo_user: string) => {
   return jwt.sign(
-    { userId }, 
+    { userId,
+      username,
+      photo_user
+     }, 
     SECRET_KEY, 
     {
       subject: userId, 
