@@ -14,7 +14,7 @@ export default function PostComponent({ id_post, profile_picture, username, post
 
     const handleLike = () => {
         setLiked(!liked);
-        toast.success(liked ? "Post descurtido!" : "Post curtido!"); // Notificação de curtir/descurtir
+        // toast.success(liked ? "Post descurtido!" : "Post curtido!"); // Notificação de curtir/descurtir
     };
 
     const handleDelete = async () => {

@@ -32,7 +32,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
   return (
     <html lang="en">
       <body className={`${nunito.className} bg-[#f1f1f3] antialiased `} >
-        <ToastContainer />
+        {/* <ToastContainer /> */}
         {children}
       </body>
     </html>
