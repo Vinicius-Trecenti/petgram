@@ -73,7 +73,7 @@ export default async function login(email: string, password: string) {
             expires: 7, // Ou o tempo desejado
             secure: true,
             sameSite: "strict",
-        });
+        });
 
         console.log(responseData)
         return { success: true, data: responseData };
