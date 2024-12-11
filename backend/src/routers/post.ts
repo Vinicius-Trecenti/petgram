@@ -15,7 +15,7 @@ export const postRouter = Router();
     postRouter.get('/getAllPost', getAllPostsController);
     postRouter.post('/comment', createCommentController);
     postRouter.get('/getComments', getCommentController);
-    postRouter.put('/updatePost', auth, upload.array('files'), uploadFiles, updatePostController);
+    postRouter.put('/updatePost', updatePostController);
     postRouter.delete('/deletePost', auth, deletePostController);
     
 

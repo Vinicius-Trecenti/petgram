@@ -14,7 +14,7 @@ export default function PostComponent({ id_post, profile_picture, username, post
 
     const handleLike = () => {
         setLiked(!liked);
-        toast.success(liked ? "Post descurtido!" : "Post curtido!"); // Notificação de curtir/descurtir
+        // toast.success(liked ? "Post descurtido!" : "Post curtido!"); // Notificação de curtir/descurtir
     };
 
     const handleDelete = async () => {
@@ -44,7 +44,7 @@ export default function PostComponent({ id_post, profile_picture, username, post
             }
 
             onDelete(id_post); // Atualiza a lista de posts no componente pai
-            toast.success("Post deletado com sucesso!");
+            // toast.success("Post deletado com sucesso!");
         } catch (error) {
             console.error("Erro ao deletar o post:", error);
             toast.error("Erro ao deletar o post. Tente novamente.");

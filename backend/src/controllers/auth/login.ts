@@ -7,6 +7,7 @@ import { clearOldRefreshToken } from "../../libs/clearOldRefreshToken";
 
 export const loginWithEmail: RequestHandler = async (req, res, next) => {
   try {
+    console.log('Entrou no console')
     const { email, password } = req.body;
 
     // Verifica se os campos estão presentes
@@ -28,6 +29,7 @@ export const loginWithEmail: RequestHandler = async (req, res, next) => {
     }
     
     const token = generateTokenProvider(checkEmail.id_user, checkEmail.username, checkEmail.photo_user ?? "");
+    console.log(checkEmail.userId, checkEmail.userModel, checkEmail.photo_post);
     
     clearOldRefreshToken(checkEmail.id_user);
 
