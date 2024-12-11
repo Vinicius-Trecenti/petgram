@@ -2,32 +2,64 @@
 
 import { LiaPawSolid } from "react-icons/lia";
 import { IoPaw } from "react-icons/io5";
-
 import { FaRegComment } from "react-icons/fa";
 import { LuSend } from "react-icons/lu";
 import { FaRegBookmark } from "react-icons/fa6";
-
-import { useState } from "react";
-
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
 
+import { useState } from "react";
+import Cookies from "js-cookie";
 
 interface PostComponentProps {
+    id_post: number;
     profile_picture: string;
     username: string;
     post_url: string;
     description: string;
     likes: number;
+    onDelete: (id_post: number) => void; // Função para deletar o post
 }
 
-export default function PostComponent({ profile_picture, username, post_url, description, likes }: PostComponentProps) {
-
+export default function PostComponent({ id_post, profile_picture, username, post_url, description, likes, onDelete }: PostComponentProps) {
     const [liked, setLiked] = useState(false);
 
-    function handleLike() {
+    const handleLike = () => {
         setLiked(!liked);
-    }
+    };
+
+    const handleDelete = async () => {
+        const token = Cookies.get("token");
+
+        if (!token) {
+            alert("Token não encontrado. Redirecionando para login...");
+            window.location.href = "/login"; // Redireciona para o login se não tiver token
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:4000/mainRoutes/post/deletePost", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+                body: JSON.stringify({ id_post }),
+            });
+
+            if (!response.ok) {
+                console.log("Erro ao deletar post:", response.status);
+                return;
+            }
+
+            // Chamando o onDelete do pai para atualizar a lista de posts
+            onDelete(id_post);
+            alert("Post deletado com sucesso!");
+
+        } catch (error) {
+            console.error("Erro ao deletar o post:", error);
+        }
+    };
 
     return (
         <div className="bg-white mx-4 my-2 rounded-lg text-black">
@@ -37,12 +69,11 @@ export default function PostComponent({ profile_picture, username, post_url, des
                     <p className="font-bold">{username}</p>
                 </div>
 
-
                 <div className="flex justify-between gap-2">
                     <button>
-                        <CiEdit className="w-6 h-6 text-blue-400"/>
+                        <CiEdit className="w-6 h-6 text-blue-400" />
                     </button>
-                    <button>
+                    <button onClick={handleDelete}>
                         <MdDelete className="w-6 h-6 text-red-400" />
                     </button>
                 </div>
@@ -63,17 +94,13 @@ export default function PostComponent({ profile_picture, username, post_url, des
                 <div className="flex items-center">
                     <FaRegBookmark className="w-6 h-6" />
                 </div>
-
             </div>
 
             <div className="p-2">
                 <p className="font-bold">{likes} Likes</p>
                 <p className="mt-1 font-bold">{username} <span className="font-medium">{description}</span></p>
                 <p className="mt-1">#Petgram</p>
-
-                {/* <p className="text-sm mt-2">Ver todos os 2 comentários</p> */}
             </div>
-
         </div>
     );
 }
