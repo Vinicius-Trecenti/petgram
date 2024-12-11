@@ -63,15 +63,13 @@ export const deletePost = async (id_post: number) => {
     return result;
 }
 
-export const updatePost = async (id_post: number, photo_post: string[], description: string) => {
+export const updatePost = async (id_post: number, description: string) => {
     const result = await prisma.post.update({
         where: {
                 id_post,
         },
         data: {
-            photo_post,
             description
-
         }
     })
 

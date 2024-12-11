@@ -3,23 +3,23 @@ import { updatePost } from "../../models/postModel";
 
 export const updatePostController: RequestHandler = async (req, res) => {
     try {
-        const { id_post, photo_post, description } = req.body;
+        const { id_post, description } = req.body;
         console.log(req.body);
         if (!id_post || !description) {
-            res.status(400).json({ message: "Id do post e descrição são obrigatórios!" });
+            res.status(400).json({ message: "Id or description are required!" });
             return;
         }
 
-        const result = await updatePost(id_post, photo_post, description);
+        const result = await updatePost(id_post, description);
 
         if (!result) {
-            res.status(400).json({ message: "Erro ao atualizar o post." });
+            res.status(400).json({ message: "Error updating post." });
             return;
         }
 
         res.status(200).json(result); // Retorna o post atualizado
     } catch (error) {
-        console.error("Erro ao atualizar post:", error);
-        res.status(500).json({ error: "Erro interno ao atualizar post." });
+        console.error("Error updating post:", error);
+        res.status(500).json({ error: "Internal error when updating post." });
     }
 };
