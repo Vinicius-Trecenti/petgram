@@ -88,7 +88,7 @@ export default function Home() {
                 },
                 body: JSON.stringify({
                     id_post: editingPost.id_post,
-                    // photo_post: [], // Atualize conforme necessário
+                    //photo_post: [], // Atualize conforme necessário
                     description: editingPost.description,
                 }),
             });

@@ -1,5 +1,4 @@
 import { RequestHandler } from "express";
-import { getAllPosts } from "../../models/postModel";
 import { compareId } from "../../models/postModel";
 export const getAllPostsController: RequestHandler = async (req, res) => {
 
