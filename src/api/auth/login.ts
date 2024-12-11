@@ -69,6 +69,12 @@ export default async function login(email: string, password: string) {
             }
         );
 
+        Cookies.set("userId", responseData.refreshToken.userId, {
+            expires: 7, // Ou o tempo desejado
+            secure: true,
+            sameSite: "strict",
+        });
+
         console.log(responseData)
         return { success: true, data: responseData };
 
