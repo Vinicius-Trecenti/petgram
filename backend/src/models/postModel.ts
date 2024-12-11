@@ -7,6 +7,7 @@ import { PrismaClient } from "@prisma/client";
      description: string,
  }
 
+
 export const createPost = async (post: postInput) => {
      const result = await prisma.post.create({
          data: {
@@ -88,5 +89,5 @@ export const compareId = async () => {
             }
         }
     })
-    return result
+    return result;
 }

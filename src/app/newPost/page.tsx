@@ -32,9 +32,6 @@ export default function page() {
         formData.append('description', text);
         formData.append('files', selectedImage); // Envia a imagem selecionada
         formData.append('id_user', userId!);
-
-        console.log(userId);
-
         try {
             const response = await fetch('http://localhost:4000/mainRoutes/post/createPost', {
                 method: 'POST',

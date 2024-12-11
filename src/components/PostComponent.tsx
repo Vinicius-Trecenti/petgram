@@ -1,29 +1,15 @@
-'use client';
-
-import { LiaPawSolid } from "react-icons/lia";
-import { IoPaw } from "react-icons/io5";
-import { FaRegComment } from "react-icons/fa";
-import { LuSend } from "react-icons/lu";
-import { FaRegBookmark } from "react-icons/fa6";
-import { CiEdit } from "react-icons/ci";
-import { MdDelete } from "react-icons/md";
-
 import { useState } from "react";
-import Cookies from "js-cookie";
+import { CiEdit } from "react-icons/ci";
+import { FaRegBookmark, FaRegComment } from "react-icons/fa6";
+import { IoPaw } from "react-icons/io5";
+import { LuSend } from "react-icons/lu";
+import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Estilos do React Toastify
+import Cookies from "js-cookie";
+import { LiaPawSolid } from "react-icons/lia";
 
-interface PostComponentProps {
-    id_post: number;
-    profile_picture: string;
-    username: string;
-    post_url: string;
-    description: string;
-    likes: number;
-    onDelete: (id_post: number) => void; // Função para deletar o post
-}
-
-export default function PostComponent({ id_post, profile_picture, username, post_url, description, likes, onDelete }: PostComponentProps) {
+// No PostComponent
+export default function PostComponent({ id_post, profile_picture, username, post_url, description, likes, onDelete, onEdit }: PostComponentProps) {
     const [liked, setLiked] = useState(false);
 
     const handleLike = () => {
@@ -69,12 +55,11 @@ export default function PostComponent({ id_post, profile_picture, username, post
         <div className="bg-white mx-4 my-2 rounded-lg text-black">
             <div className="flex justify-between items-center gap-2 ml-2 mt-2">
                 <div className="flex items-center mt-2">
-                    <img src={profile_picture} alt="" className="w-12 h-12 rounded-full" />
                     <p className="font-bold">{username}</p>
                 </div>
 
                 <div className="flex justify-between gap-2">
-                    <button>
+                    <button onClick={() => onEdit(id_post, description)}>
                         <CiEdit className="w-6 h-6 text-blue-400" />
                     </button>
                     <button onClick={handleDelete}>

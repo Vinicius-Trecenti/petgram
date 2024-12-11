@@ -55,7 +55,7 @@ export default async function login(email: string, password: string) {
 
         Cookies.set("token", responseData.token,
             {
-                expires: 1000,
+                expires: 7,
                 secure: true,
                 sameSite: "strict",
             }
@@ -70,7 +70,7 @@ export default async function login(email: string, password: string) {
         );
 
         Cookies.set("userId", responseData.refreshToken.userId, {
-            expires: 1000, // Ou o tempo desejado
+            expires: 7, // Ou o tempo desejado
             secure: true,
             sameSite: "strict",
         });

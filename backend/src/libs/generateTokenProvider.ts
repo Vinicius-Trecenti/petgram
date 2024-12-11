@@ -10,7 +10,7 @@ export const generateTokenProvider = (userId: string, username: string, photo_us
      },
     SECRET_KEY,
     {
-      subject: userId,
+      subject: userId, 
       expiresIn: "30 minute",
     }
   );
