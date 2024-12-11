@@ -1,5 +1,6 @@
 import express, { Request, Response} from 'express';
 import mainRouter from './routers/main';
+import postRouter from './routers/postRouter';
 import errorHandler from './middleware/errorHandler';
 import logger from './middleware/logger';
 import dotenv from 'dotenv';
@@ -9,7 +10,7 @@ import cors from 'cors';
 const app = express();
 app.use(logger)
 
-const PORT = 3000;
+const PORT = 4000;
 
 app.use(express.json());
 dotenv.config();

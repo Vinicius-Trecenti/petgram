@@ -37,12 +37,13 @@ export default function Home() {
                 const token = Cookies.get("token"); // Pega o token dos cookies
 
                 if (!token) {
+                    alert("Token not found. Redirecting to login...");
                     console.log("Token não encontrado. Redirecionando para login...");
                     window.location.href = "/login"; // Redireciona para o login se não tiver token
                     return;
                 }
 
-                const response = await fetch("http://localhost:4000/posts", {
+                const response = await fetch("http://localhost:4000/mainRoutes/post/getAllPost", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -51,7 +52,7 @@ export default function Home() {
                 });
 
                 if (!response.ok) {
-                    // Caso a resposta não seja OK, você pode lidar com erros de token expirado ou outros
+                    alert("Erro ao buscar posts. Redirecting to login...");
                     console.log("Erro ao buscar posts:", response.status);
                     window.location.href = "/login"; // Redireciona se ocorrer um erro de autenticação
                     return;
@@ -79,9 +80,9 @@ export default function Home() {
                         key={post.id_post}
                         profile_picture={post.User?.profile_picture || ''}
                         username={post.User?.username || 'Anônimo'}
-                        post_url={post.photo_post}
+                        post_url={post.photo_post[0]} // Apenas a primeira imagem
                         description={post.description}
-                        likes={post.liked_post.length}
+                        likes={post.liked_post?.length || 0}
                     />
                 ))}
             </div>

@@ -27,6 +27,16 @@ export default async function login(email: string, password: string) {
                     alert: true,
                     error: "Credenciais inválidas. Por favor, verifique seu email e senha." };
             }
+            if(response.status === 404) {
+                return {
+                    alert: true,
+                    error: "Credenciais inválidas. Por favor, verifique seu email e senha." };
+            }
+            if(response.status === 500) {
+                return {
+                    alert: true,
+                    error: "Erro interno no servidor. Por favor, tente novamente mais tarde." };
+            }
 
             const errorData = await response.json();
 
@@ -42,11 +52,18 @@ export default async function login(email: string, password: string) {
         }
 
         const responseData = await response.json();
-        responseData.token = "tokenteste";
 
         Cookies.set("token", responseData.token,
             {
                 expires: 7,
+                secure: true,
+                sameSite: "strict",
+            }
+        );
+
+        Cookies.set("refreshToken", responseData.refreshToken,
+            {
+                expires: Math.floor(responseData.refreshToken.expiresIn / (60 * 60 * 24)),
                 secure: true,
                 sameSite: "strict",
             }
