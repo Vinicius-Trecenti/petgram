@@ -80,7 +80,7 @@ export default function Home() {
                         key={post.id_post}
                         profile_picture={post.User?.profile_picture || ''}
                         username={post.User?.username || 'Anônimo'}
-                        post_url={post.photo_post[1]} // Apenas a primeira imagem
+                        post_url={post.photo_post[0]}
                         description={post.description}
                         likes={post.liked_post?.length || 0}
                     />
